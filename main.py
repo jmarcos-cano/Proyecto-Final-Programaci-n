@@ -39,6 +39,10 @@ def send_message():
 def send_email():
   print("Enviar email")
 
+#Exportar contactos 
+def export_contacts():
+  print("Exportar")
+
 #exit
 def exit():
   print("Salir del programa")
@@ -63,8 +67,25 @@ def menu():
     print("Opcion incorrecta. Porfavor ingrese otra vez.")
     return None
   
+contacts = get_contacts()
 
+switcher = {
+  1: add_contact,
+  2: search_contact,
+  3: list_contacts,
+  4: delete_contact,
+  5: call_contact,
+  6: send_message,
+  7: send_email,
+  8: export_contacts,
+  9: exit,
+}
 
+accion = 0 
+while accion != 9:
+  accion = menu()
+  func = switcher.get(accion, lambda: print("Opcion incorrecta, intente de nuevo."))
+  func()
 
 
 
