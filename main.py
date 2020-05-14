@@ -73,8 +73,18 @@ add_contact()
 def search_contact():
   """Search and show all contact names which contains the entered keyword"""
 
-  print("Buscar contacto")
-  print(contacts)
+  search = input("Ingrese el contacto que desea buscar:")
+  found = []
+  for letter, contacts in phone_book.items():
+    for name, info in contacts.items():
+      print("name:",name)
+      if search in name:
+        found.append(name)
+
+  print("\nResultados: ")
+  for f in found:
+    print("- ", f)
+  
 
 #Listar contacto
 def list_contacts():
@@ -156,6 +166,8 @@ for letter, contacts in phone_book.items():
   for name, info in contacts.items():
     print("name:", name)
     print("info", info)
+
+
 
 
 
