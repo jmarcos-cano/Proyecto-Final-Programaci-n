@@ -89,6 +89,40 @@ def search_contact():
 #Listar contacto
 def list_contacts():
   """Show a list of all contacts sorted alphabetically by first letter of their name"""
+  
+  i = 1
+  for letter in sorted(phone_book.keys()):
+    print(letter+":")
+    for name in sorted(phone_book[letter].keys()):
+      print("\t"+str(i)+".",name)
+      i +=1
+  
+  print("----------------------")
+  while True:
+    try:
+      ver = int(input("Ver Contacto: "))
+      break
+    except:
+      print("\nDebe ingresar el numero del contacto que aparece en el listado.")
+  
+  i =1
+  found = False 
+  for letter in sorted(phone_book.keys()):
+    for name in sorted(phone_book[letter].keys()):
+      if i == ver:
+        print(name+":")
+        print("\ttelefono: " + phone_book[letter][name]["telefono"])
+        print("\temail: "+ phone_book[letter][name]["email"])
+        print("\tcompany: " + phone_book[letter][name]["company"])
+        print("\textra: "+ phone_book[letter][name]["extra"])
+        found = True
+        break
+      i +=1
+    if found:
+      break
+  if not found:
+    print("Numero de contacto inexistente\n")
+  input("\nPresione Enter para continuar...")
 
   print("Listar contactos")
   print(contacts)
