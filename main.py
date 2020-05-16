@@ -55,7 +55,7 @@ def add_contact():
   except KeyError:
     phone_book[nombre[0].upper()] = {nombre: contact}
   print("\n Usuario agregado con exito!")
-  time.sleep(2)
+  input("\n Presione Enter para continuar...")
 
 def validate_contact(nombre, telefono, correo):
   if len(nombre.split()) !=2:
@@ -67,7 +67,6 @@ def validate_contact(nombre, telefono, correo):
   else:
     return True, "pass"
 
-add_contact()
 
 #Buscar contacto
 def search_contact():
@@ -98,6 +97,9 @@ def list_contacts():
       i +=1
   
   print("----------------------")
+
+def get_contact():
+  list_contacts()
   while True:
     try:
       ver = int(input("Ver Contacto: "))
@@ -123,9 +125,6 @@ def list_contacts():
   if not found:
     print("Numero de contacto inexistente\n")
   input("\nPresione Enter para continuar...")
-
-  print("Listar contactos")
-  print(contacts)
 
 # Borrar contacto
 def delete_contact():
@@ -185,14 +184,11 @@ switcher = {
     9: exit,
 }
 
-"""
 accion = 0 
 while accion != 9:
   accion = menu()
   func = switcher.get(accion, lambda: print("Opcion incorrecta. Porfavor intente de nuevo."))
   func()
-
-"""
 
 for letter, contacts in phone_book.items():
   print("letter:",letter)
