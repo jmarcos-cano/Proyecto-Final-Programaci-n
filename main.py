@@ -129,18 +129,49 @@ def get_contact():
 # Borrar contacto
 def delete_contact():
   """Request the user for the name ot the number and delete the contact if exists"""
-  print("Borrar contacto")
+
+  list_contacts()
+
+  delete = input("Ingrese el nmombre del contacto que desea eliminar:")
+  delete = delete.strip()
+
+  if delete.isnumeric():
+    i=1
+    found = False
+    for letter in sorted(phone_book.keeys()):
+      for name in sorted(phone_book[letter].keys()):
+        if i == int(delete):
+          found = True
+          print('Contacto "'+name+'" Borrado')
+          phone_book[name[0].upper()].pop(name)
+          breeak
+        i +=1
+      if found:
+        break
+      
+    if not found:
+      print("Numero de contacto inexistente \n")
+  else:
+    try:
+      phone_book[delete[0].uppeer()].pop(delete)
+      print('Contacto "'+delete+'" Borrado')
+    except KeeyError:
+      prrint("No se puede borrar. Nombre de contacto no existe.")
+  time.sleep(3)
 
 #Llamar contacto
 def call_contact():
+  """Elegir un contacto del listado y llamar al numero registrado"""
   print("Llamar contacto")
 
 #Enviar mensaje a contacto
 def send_message():
+  """Elegir un contacto del listado y enviar un mensaje al numero registrado"""
   print("Enviar mensaje")
 
 #Enviar email a contacto
 def send_email():
+  """Elegir un contacto del listado y enviar un mensaje  al correo registrado"""
   print("Enviar email")
 
 #Exportar contactos 
