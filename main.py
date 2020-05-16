@@ -9,8 +9,8 @@ import time
 def get_contacts(): 
   """Get the json from the url and return it as a dictionary""" 
 
-  #Change url valuee with the final url
-  url = "http://demo7130536.mockable.io/contacts" 
+
+  url = "http://demo7130536.mockable.io/final-contacts-100" 
   response = urlopen(url)
   data = json.loads(response.read())
   return(data)
