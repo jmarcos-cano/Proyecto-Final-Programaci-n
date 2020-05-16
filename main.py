@@ -162,7 +162,35 @@ def delete_contact():
 #Llamar contacto
 def call_contact():
   """Elegir un contacto del listado y llamar al numero registrado"""
-  print("Llamar contacto")
+  list_contacts()
+
+  contacto = input("Ingrese el numero o el nombre exacto del contacto a llamar: ")
+  contacto = contacto.strip()
+
+  if contacto.isnumeric():
+    #Llamar por numero
+    i = 1
+    found = False 
+    for letter in sorted(phone_book.keys()):
+      for name in sorted(phone_book[letter].keys()):
+        if i == int(contacto):
+          found = True
+          print('Llamando a "'+name+'" al'+phone_book[name[0].upper()][name]["telefono"]+"...")
+          break
+        i +=1
+      if found:
+        break
+
+    if not found:
+      print("No se pudo llamar. Numero de contacto inexistente\n")
+  else:
+    #Llamar por nombre
+    try:
+      print('Llamando a "'+contacto+'" al '+phone_book[contacto[0].upper()][contacto]["telefono"]+"...")
+    except KeyError:
+      print("No se pudo llamar. Nombre de contacto inexistente.\n")
+  time.sleep(3)
+  
 
 #Enviar mensaje a contacto
 def send_message():
