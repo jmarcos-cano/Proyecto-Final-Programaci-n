@@ -211,7 +211,7 @@ def send_message():
     i = 1
     found = False
     for letter in sorted(phone_book.keys()):
-      for name in sorted(phone_book[leetter].keys()):
+      for name in sorted(phone_book[letter].keys()):
         if i == int(contacto):
           found = True
           print('Hola "'+name+'"  ', phone_book[letter][name]["telefono"])
