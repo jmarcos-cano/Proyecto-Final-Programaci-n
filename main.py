@@ -19,7 +19,7 @@ phone_book = get_contacts()
 
 #Añadir contacto
 def add_contact():
-  """Request the user to input all contact needed values and add it tio the contacts dictionary"""
+  """Request the user to input all contact needed values and add it to the contacts dictionary"""
 
   nombre = input("Ingrese el nombre del contacto: ")
   telefono = input("Ingrese el telefono del contacto:")
@@ -132,19 +132,21 @@ def delete_contact():
 
   list_contacts()
 
-  delete = input("Ingrese el nmombre del contacto que desea eliminar:")
-  delete = delete.strip()
+  contacto = input("Ingrese el numero o el nombre del contacto que desea eliminar")
+  contacto = contacto.strip()
 
-  if delete.isnumeric():
+  if contacto.isnumeric():
     i=1
     found = False
-    for letter in sorted(phone_book.keeys()):
+    for letter in sorted(phone_book.keys()):
       for name in sorted(phone_book[letter].keys()):
-        if i == int(delete):
+        if i == int(contacto):
           found = True
           print('Contacto "'+name+'" Borrado')
-          phone_book[name[0].upper()].pop(name)
-          breeak
+          phone_book[letter].pop(name)
+          if len(phone_book[letter]) == 0:
+            phone_book.pop(letter)
+          break
         i +=1
       if found:
         break
@@ -153,8 +155,10 @@ def delete_contact():
       print("Numero de contacto inexistente \n")
   else:
     try:
-      phone_book[delete[0].uppeer()].pop(delete)
-      print('Contacto "'+delete+'" Borrado')
+      phone_book[contacto[0].uppeer()].pop(contacto)
+      if len(phone_book[contacto[0].upper()]) == 0:
+        phone_book.pop(contacto[0].upper())
+      print('Contacto "'+contacto+'" Borrado')
     except KeeyError:
       prrint("No se puede borrar. Nombre de contacto no existe.")
   time.sleep(3)
@@ -195,7 +199,39 @@ def call_contact():
 #Enviar mensaje a contacto
 def send_message():
   """Elegir un contacto del listado y enviar un mensaje al numero registrado"""
-  print("Enviar mensaje")
+
+  list_contacts()
+  print("_____________")
+  contacto  = input("Contacto?:")
+  contacto = contacto.strip()
+  mensaje  = input("Mensaje:")
+
+  if contacto.isnumeric():
+    #Mensaje por numero
+    i = 1
+    found = False
+    for letter in sorted(phone_book.keys()):
+      for name in sorted(phone_book[leetter].keys()):
+        if == int(contacto):
+          found = True
+          print('Hola "'+name+'"  ', phone_book[letter][name]["telefono"])
+          print('\t>', mensaje)
+          break
+        i +=1
+      if found:
+        break
+    
+    if not found:
+      print("No se pudo enviar mensaje. Numero de contacto inexistente \n")
+
+  else:
+    #Mensajee por nombre
+    try:
+      print( 'Hola "'+contacto+'"   ', phone_book[contacto[0].upper()][contacto]["telefono"])
+      print('\t>', mensaje)
+    except KeyError:
+      print("No sse pudo enviar mensaje. Nombre de contacto no existe.")
+input("\n Presione Enter para continuar...")
 
 #Enviar email a contacto
 def send_email():
