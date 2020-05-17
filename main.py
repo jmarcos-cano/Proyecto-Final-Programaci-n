@@ -9,7 +9,6 @@ import time
 def get_contacts(): 
   """Get the json from the url and return it as a dictionary""" 
 
-
   url = "http://demo7130536.mockable.io/final-contacts-100" 
   response = urlopen(url)
   data = json.loads(response.read())
@@ -236,7 +235,42 @@ input("\n Presione Enter para continuar...")
 #Enviar email a contacto
 def send_email():
   """Elegir un contacto del listado y enviar un mensaje  al correo registrado"""
-  print("Enviar email")
+
+  list_contacts()
+  print("----------")
+  contacto=input("Contacto?: ")
+  contacto = contacto.strip()
+  subject = input("Subject: ")
+  mensaje = input("Mensaje: ")
+  print()
+  if contacto.isnumeric():
+    #Mensaje por numero
+    i = 1
+    found = False
+    for letter in sorted(phone_book.keys()):
+      if i == int(contacto):
+        found = True
+        print('Enviando correo a "'+name+'"',phone_book[letter][name]["email"])
+        print('\t>Subject:',subject)
+        print('\t>Message:',mensaje)
+        break
+      i +=1
+    if found:
+      break
+
+    if not found:
+      print("No se pudo enviar el mensaje. Numero de contacto inexistente.\n")
+  
+  else:
+    #Mensaje por nombre
+    try:
+      print('Enviando correo a "'+contacto+'"',phone_book[letter][contacto]["email"])
+        print('\t>Subject:',subject)
+        print('\t>Message:',mensaje)
+    except KeyError:
+      print("No se pudo enviar el mensaje. Nombre de contacto inexistente.")
+  input("\nPresione Enter para continuar...")
+
 
 #Exportar contactos 
 def export_contacts():
