@@ -27,8 +27,8 @@ decorator = ">=3.4.0"
 six = ">=1.4.0"
 
 [metadata]
-content-hash = "055a7995312f2c2c58b727f795ae6293572e46f8db524bbf827452b179c9d9f3"
-python-versions = "^3.8"
+content-hash = "168e2116cedffee1d634facde6867425017e4343f81d8bb18f9c8cd4c832ac09"
+python-versions = "^3.7"
 
 [metadata.hashes]
 decorator = ["41fa54c2a0cc4ba648be4fd43cff00aedf5b9465c9bf18d64325bc225f08f760", "e3a62f0520172440ca0dcc823749319382e377f37f140a0b99ef45fecb84bfe7"]

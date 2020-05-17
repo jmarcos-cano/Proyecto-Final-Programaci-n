@@ -23,9 +23,9 @@ def add_contact():
 
   nombre = input("Ingrese el nombre del contacto: ")
   telefono = input("Ingrese el telefono del contacto:")
-  correo = input("Ingrese el correo del contacto")
-  empresa = input("(Opcional) Ingrese la empresa del contacto")
-  extra = input("(Opcional) Ingrese infirmacion adicional del contacto")
+  correo = input("Ingrese el correo del contacto:")
+  empresa = input("(Opcional) Ingrese la empresa del contacto:")
+  extra = input("(Opcional) Ingrese informacion adicional del contacto:")
 
   isOK, stage = validate_contact(nombre, telefono, correo)
   while isOK == False:
@@ -142,7 +142,7 @@ def delete_contact():
       for name in sorted(phone_book[letter].keys()):
         if i == int(contacto):
           found = True
-          print('Contacto "'+name+'" Borrado')
+          print('Contacto: "'+name+'" Borrado')
           phone_book[letter].pop(name)
           if len(phone_book[letter]) == 0:
             phone_book.pop(letter)
@@ -179,7 +179,7 @@ def call_contact():
       for name in sorted(phone_book[letter].keys()):
         if i == int(contacto):
           found = True
-          print('Llamando a "'+name+'" al'+phone_book[name[0].upper()][name]["telefono"]+"...")
+          print('Llamando a "'+name+'" al '+phone_book[name[0].upper()][name]["telefono"]+"...")
           break
         i +=1
       if found:
@@ -212,7 +212,7 @@ def send_message():
     found = False
     for letter in sorted(phone_book.keys()):
       for name in sorted(phone_book[leetter].keys()):
-        if == int(contacto):
+        if i == int(contacto):
           found = True
           print('Hola "'+name+'"  ', phone_book[letter][name]["telefono"])
           print('\t>', mensaje)
@@ -250,15 +250,15 @@ def send_email():
     found = False
     for letter in sorted(phone_book.keys()):
       for name in sorted(phone_book[letter].keys()):
-      if i == int(contacto):
-        found = True
-        print('Enviando correo a "'+name+'"',phone_book[letter][name]["email"])
-        print('\t>Subject:',subject)
-        print('\t>Message:',mensaje)
+        if i == int(contacto):
+          found = True
+          print('Enviando correo a "'+name+'"',phone_book[letter][name]["email"])
+          print('\t>Subject:',subject)
+          print('\t>Message:',mensaje)
+          break
+        i +=1
+      if found:
         break
-      i +=1
-    if found:
-      break
 
     if not found:
       print("No se pudo enviar el mensaje. Numero de contacto inexistente.\n")
@@ -267,8 +267,8 @@ def send_email():
     #Mensaje por nombre
     try:
       print('Enviando correo a "'+contacto+'"',phone_book[letter][contacto]["email"])
-        print('\t>Subject:',subject)
-        print('\t>Message:',mensaje)
+      print('\t>Subject:',subject)
+      print('\t>Message:',mensaje)
     except KeyError:
       print("No se pudo enviar el mensaje. Nombre de contacto inexistente.")
   input("\nPresione Enter para continuar...")
