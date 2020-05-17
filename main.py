@@ -132,7 +132,7 @@ def delete_contact():
 
   list_contacts()
 
-  contacto = input("Ingrese el numero o el nombre del contacto que desea eliminar")
+  contacto = input("Ingrese el numero o el nombre del contacto que desea eliminar:")
   contacto = contacto.strip()
 
   if contacto.isnumeric():
@@ -155,11 +155,11 @@ def delete_contact():
       print("Numero de contacto inexistente \n")
   else:
     try:
-      phone_book[contacto[0].uppeer()].pop(contacto)
+      phone_book[contacto[0].upper()].pop(contacto)
       if len(phone_book[contacto[0].upper()]) == 0:
         phone_book.pop(contacto[0].upper())
       print('Contacto "'+contacto+'" Borrado')
-    except KeeyError:
+    except KeyError:
       prrint("No se puede borrar. Nombre de contacto no existe.")
   time.sleep(3)
 
