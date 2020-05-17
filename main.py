@@ -4,6 +4,7 @@ import json
 from urllib.request import urlopen
 import validators 
 import time
+import csv
 
 #get contacts from JSON and initialize
 def get_contacts(): 
@@ -248,6 +249,7 @@ def send_email():
     i = 1
     found = False
     for letter in sorted(phone_book.keys()):
+      for name in sorted(phone_book[letter].keys()):
       if i == int(contacto):
         found = True
         print('Enviando correo a "'+name+'"',phone_book[letter][name]["email"])
@@ -274,7 +276,22 @@ def send_email():
 
 #Exportar contactos 
 def export_contacts():
-  print("Exportar")
+  """Except all contacts to a file named contact_manager.csv"""
+
+  try:
+    with open('contact_manager.csv', mode='w', newline='') as contacts_file: 
+      writer = csv.writer(contacts_file, delimiter=',', quotechar = '"')
+
+      writer.writerow( ["Contactonombrre", "telefono", "corrreo", "empresa","extra"])
+      for letterr, contacts in phone_book.items():
+        for name, info in contacts.items():
+          writer.writerow([name, info["telefono"], info["email"], info["company"], info["extra"] ])
+    print("Contactos exportados exitosamente")
+  except Exception as e:
+    print(e)
+    print("Hubo un error al exportar los contactos. Por favor intente de nuevo.")
+  input("\n Presione Enter para continuar...")
+    
 
 #exit
 def exit_program():
@@ -319,12 +336,6 @@ while accion != 9:
   func = switcher.get(accion, lambda: print("Opcion incorrecta. Porfavor intente de nuevo."))
   func()
 
-for letter, contacts in phone_book.items():
-  print("letter:",letter)
-  print("contacts:", contacts)
-  for name, info in contacts.items():
-    print("name:", name)
-    print("info", info)
 
 
 
